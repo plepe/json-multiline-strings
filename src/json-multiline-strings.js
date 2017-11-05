@@ -28,8 +28,10 @@ function join (data) {
 
 function split (data) {
   for (var k in data) {
-    if (typeof data[k] === 'string' && data[k].search('\n') !== -1) {
-      data[k] = data[k].split(/\n/g)
+    if (typeof data[k] === 'string') {
+      if (data[k].search('\n') !== -1) {
+        data[k] = data[k].split(/\n/g)
+      }
     } else if (data[k] !== null && data[k][Symbol.iterator]) {
       data[k] = split(data[k])
     }
