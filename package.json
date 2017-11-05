@@ -12,6 +12,6 @@
   },
   "scripts": {
     "test": "mocha test/test.js && vendor/bin/phpunit test/test.php",
-    "lint": "standard src/*js && vendor/bin/php-cs-fixer fix src/json-multiline-strings.php --dry-run --diff"
+    "lint": "standard src/*js test/*js && vendor/bin/php-cs-fixer fix src/json-multiline-strings.php --dry-run --diff && vendor/bin/php-cs-fixer fix test/test.php --dry-run --diff"
   }
 }
