@@ -1,9 +1,15 @@
 {
   "name": "json-multiline-strings",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "One shortcoming of JSON is the lack of multiline support. This module will split/join multiline strings to string arrays which is more readable.",
   "main": "index.js",
   "repository": "git@github.com:plepe/json-multiline-strings.git",
   "author": "Stephan Bösch-Plepelits <skunk@xover.mud.at>",
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "standard": "^10.0.3"
+  },
+  "scripts": {
+    "lint": "standard src/*js && vendor/bin/php-cs-fixer fix src/json-multiline-strings.php --dry-run --diff"
+  }
 }
