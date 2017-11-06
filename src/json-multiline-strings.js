@@ -19,10 +19,12 @@ function join (data, options) {
     options = {}
   }
 
-  for (var k in data) {
-    if (isStringArray(data[k])) {
-      data[k] = data[k].join('\n')
-    } else if (typeof data[k] === 'object') {
+  if (isStringArray(data)) {
+    return data.join('\n')
+  }
+
+  if (typeof data === 'object') {
+    for (var k in data) {
       data[k] = join(data[k])
     }
   }
@@ -35,12 +37,16 @@ function split (data, options) {
     options = {}
   }
 
-  for (var k in data) {
-    if (typeof data[k] === 'string') {
-      if (data[k].search('\n') !== -1) {
-        data[k] = data[k].split(/\n/g)
-      }
-    } else if (data[k] !== null && data[k][Symbol.iterator]) {
+  if (typeof data === 'string') {
+    if (data.search('\n') !== -1) {
+      return data.split(/\n/g)
+    }
+
+    return data
+  }
+
+  if (typeof data === 'object') {
+    for (var k in data) {
       data[k] = split(data[k])
     }
   }

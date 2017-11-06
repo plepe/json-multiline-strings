@@ -1,10 +1,16 @@
 <?php
 function jsonMultilineStringsSplit($data, $options=array())
 {
-    foreach ($data as $k => $v) {
-        if (is_string($v) && strpos($v, "\n") !== false) {
-            $data[$k] = explode("\n", $v);
-        } elseif (is_array($v)) {
+    if (is_string($data)) {
+        if (strpos($data, "\n") !== false) {
+            return  explode("\n", $data);
+        }
+
+        return $data;
+    }
+
+    if (is_array($data)) {
+        foreach ($data as $k => $v) {
             $data[$k] = jsonMultilineStringsSplit($v);
         }
     }
@@ -18,6 +24,10 @@ function jsonMultilineStringsSplit($data, $options=array())
  */
 function isStringArray($arr)
 {
+    if (!is_array($arr)) {
+        return false;
+    }
+
     if (array_keys($arr) !== range(0, sizeof($arr) - 1)) {
         return false;
     }
@@ -33,10 +43,12 @@ function isStringArray($arr)
 
 function jsonMultilineStringsJoin($data, $options=array())
 {
-    foreach ($data as $k => $v) {
-        if (isStringArray($v)) {
-            $data[$k] = implode("\n", $v);
-        } elseif (is_array($v)) {
+    if (isStringArray($data)) {
+        return implode("\n", $data);
+    }
+
+    if (is_array($data)) {
+        foreach ($data as $k => $v) {
             $data[$k] = jsonMultilineStringsJoin($v);
         }
     }
