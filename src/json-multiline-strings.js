@@ -14,7 +14,11 @@ function isStringArray (arr) {
   return true
 }
 
-function join (data) {
+function join (data, options) {
+  if (!options) {
+    options = {}
+  }
+
   for (var k in data) {
     if (isStringArray(data[k])) {
       data[k] = data[k].join('\n')
@@ -26,7 +30,11 @@ function join (data) {
   return data
 }
 
-function split (data) {
+function split (data, options) {
+  if (!options) {
+    options = {}
+  }
+
   for (var k in data) {
     if (typeof data[k] === 'string') {
       if (data[k].search('\n') !== -1) {

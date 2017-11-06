@@ -37,11 +37,17 @@ console.log(JSON.stringify(jsonMultilineStrings.join(input), null, '    '))
 ```
 
 # API
-## jsonMultilineStrings.split(data) resp. jsonMultilineStringsSplit(data)
+## jsonMultilineStrings.split(data, options) resp. jsonMultilineStringsSplit(data, options)
 Processes input data recursively and convert all multiline strings to string arrays.
 
-## jsonMultilineStrings.join(data) resp. jsonMultilineStringsJoin(data)
+Options:
+- currently none
+
+## jsonMultilineStrings.join(data, options) resp. jsonMultilineStringsJoin(data, options)
 Processes input data recursively and convert all string arrays to multiline strings.
+
+Options:
+- currently none
 
 # INSTALL
 ## JS usage via npm

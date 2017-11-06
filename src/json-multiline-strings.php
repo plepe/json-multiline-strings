@@ -1,5 +1,5 @@
 <?php
-function jsonMultilineStringsSplit($data)
+function jsonMultilineStringsSplit($data, $options=array())
 {
     foreach ($data as $k => $v) {
         if (is_string($v) && strpos($v, "\n") !== false) {
@@ -31,7 +31,7 @@ function isStringArray($arr)
     return true;
 }
 
-function jsonMultilineStringsJoin($data)
+function jsonMultilineStringsJoin($data, $options=array())
 {
     foreach ($data as $k => $v) {
         if (isStringArray($v)) {
