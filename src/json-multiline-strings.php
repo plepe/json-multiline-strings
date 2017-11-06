@@ -11,7 +11,9 @@ function jsonMultilineStringsSplit($data, $options=array())
 
     if (is_array($data)) {
         foreach ($data as $k => $v) {
-            $data[$k] = jsonMultilineStringsSplit($v);
+            $nextOpt = $options;
+
+            $data[$k] = jsonMultilineStringsSplit($v, $nextOpt);
         }
     }
 
@@ -49,7 +51,9 @@ function jsonMultilineStringsJoin($data, $options=array())
 
     if (is_array($data)) {
         foreach ($data as $k => $v) {
-            $data[$k] = jsonMultilineStringsJoin($v);
+            $nextOpt = $options;
+
+            $data[$k] = jsonMultilineStringsJoin($v, $nextOpt);
         }
     }
 
