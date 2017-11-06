@@ -13,6 +13,14 @@ class jsonMultilineStrings extends TestCase
         $this->assertEquals($expected, jsonMultilineStringsSplit($input));
     }
 
+    public function testjsonMultilineStringsSplit_excluded()
+    {
+        $input = array( "foo" => "bar", "long" => "text with\nseveral\nline breaks", "excluded" => "text with\nseveral\nline breaks", "number" => 5);
+        $expected = array( "foo" => "bar", "long" => array("text with", "several", "line breaks"), "excluded" => "text with\nseveral\nline breaks", "number" => 5 );
+
+        $this->assertEquals($expected, jsonMultilineStringsSplit($input, array('excluded' => array(array('excluded')))));
+    }
+
     public function testjsonMultilineStringsSplit_string_only()
     {
         $input = 'text without line breaks';
@@ -35,6 +43,14 @@ class jsonMultilineStrings extends TestCase
         $expected = array( "foo" => "bar", "long" => "text with\nseveral\nline breaks", "nojoin" => array( "this no join", 1 ));
 
         $this->assertEquals($expected, jsonMultilineStringsJoin($input));
+    }
+
+    public function testjsonMultilineStringsJoin_excluded()
+    {
+        $input = array( "foo" => "bar", "long" => array("text with", "several", "line breaks"), "excluded" => array("text with", "several", "line breaks"), "number" => 5);
+        $expected = array( "foo" => "bar", "long" => "text with\nseveral\nline breaks", "excluded" => array("text with", "several", "line breaks"), "number" => 5 );
+
+        $this->assertEquals($expected, jsonMultilineStringsJoin($input, array('excluded' => array(array('excluded')))));
     }
 
     public function testjsonMultilineStringsJoin_string_only()

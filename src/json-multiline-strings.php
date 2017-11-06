@@ -1,6 +1,23 @@
 <?php
+function reducePath ($paths, $currentPath)
+{
+    $ret = array_filter($paths, function ($path) use ($currentPath) {
+        return (sizeof($path) && $path[0] === $currentPath);
+    });
+
+    $ret = array_map(function ($path) {
+        return array_slice($path, 1);
+    }, $ret);
+
+    return $ret;
+}
+
 function jsonMultilineStringsSplit($data, $options=array())
 {
+    if (array_key_exists('excluded', $options) && array_search(array(), $options['excluded']) !== false) {
+        return $data;
+    }
+
     if (is_string($data)) {
         if (strpos($data, "\n") !== false) {
             return  explode("\n", $data);
@@ -12,6 +29,10 @@ function jsonMultilineStringsSplit($data, $options=array())
     if (is_array($data)) {
         foreach ($data as $k => $v) {
             $nextOpt = $options;
+
+            if (array_key_exists('excluded', $options)) {
+                $nextOpt['excluded'] = reducePath($options['excluded'], $k);
+            }
 
             $data[$k] = jsonMultilineStringsSplit($v, $nextOpt);
         }
@@ -45,6 +66,10 @@ function isStringArray($arr)
 
 function jsonMultilineStringsJoin($data, $options=array())
 {
+    if (array_key_exists('excluded', $options) && array_search(array(), $options['excluded']) !== false) {
+        return $data;
+    }
+
     if (isStringArray($data)) {
         return implode("\n", $data);
     }
@@ -52,6 +77,10 @@ function jsonMultilineStringsJoin($data, $options=array())
     if (is_array($data)) {
         foreach ($data as $k => $v) {
             $nextOpt = $options;
+
+            if (array_key_exists('excluded', $options)) {
+                $nextOpt['excluded'] = reducePath($options['excluded'], $k);
+            }
 
             $data[$k] = jsonMultilineStringsJoin($v, $nextOpt);
         }
