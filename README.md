@@ -36,7 +36,35 @@ console.log(JSON.stringify(jsonMultilineStrings.join(input), null, '    '))
 }
 ```
 
+# API
+## jsonMultilineStrings.split(data) resp. jsonMultilineStringsSplit(data)
+Processes input data recursively and convert all multiline strings to string arrays.
+
+## jsonMultilineStrings.join(data) resp. jsonMultilineStringsJoin(data)
+Processes input data recursively and convert all string arrays to multiline strings.
+
 # INSTALL
+## JS usage via npm
+```sh
+npm install --save json-multiline-strings
+```
+
+```js
+var jsonMultilineStrings = require('json-multiline-strings')
+jsonMultilineStrings.split(...)
+jsonMultilineStrings.join(...)
+```
+
+## PHP usage via composer
+```sh
+composer install plepe/json-multiline-strings
+```
+
+```php
+jsonMultilineStringsSplit(...)
+jsonMultilineStringsJoin(...)
+```
+
 ## Development
 ```sh
 git clone https://github.com/plepe/json-multiline-strings.git
