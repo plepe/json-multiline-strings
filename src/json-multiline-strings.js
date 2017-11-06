@@ -25,7 +25,9 @@ function join (data, options) {
 
   if (typeof data === 'object') {
     for (var k in data) {
-      data[k] = join(data[k])
+      var nextOpt = options
+
+      data[k] = join(data[k], nextOpt)
     }
   }
 
@@ -47,7 +49,9 @@ function split (data, options) {
 
   if (typeof data === 'object') {
     for (var k in data) {
-      data[k] = split(data[k])
+      var nextOpt = options
+
+      data[k] = split(data[k], options)
     }
   }
 
