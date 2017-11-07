@@ -1,3 +1,24 @@
+function reducePath (paths, currentPath) {
+  var ret = paths.filter(function (path) {
+    return path.length && path[0] === currentPath
+  })
+
+  ret = ret.map(function (path) {
+    return path.slice(1)
+  })
+
+  return ret
+}
+
+function pathReached (paths) {
+  for (var i = 0; i < paths.length; i++) {
+    if (paths[i].length === 0)
+      return true
+  }
+
+  return false
+}
+
 function isStringArray (arr) {
   if (!Array.isArray(arr)) {
     return false
@@ -19,13 +40,21 @@ function join (data, options) {
     options = {}
   }
 
+  if (options.excluded && pathReached(options.excluded)) {
+    return data
+  }
+
   if (isStringArray(data)) {
     return data.join('\n')
   }
 
   if (typeof data === 'object') {
     for (var k in data) {
-      var nextOpt = options
+      var nextOpt = JSON.parse(JSON.stringify(options))
+
+      if (options.excluded) {
+        nextOpt.excluded = reducePath(options.excluded, k)
+      }
 
       data[k] = join(data[k], nextOpt)
     }
@@ -39,6 +68,10 @@ function split (data, options) {
     options = {}
   }
 
+  if (options.excluded && pathReached(options.excluded)) {
+    return data
+  }
+
   if (typeof data === 'string') {
     if (data.search('\n') !== -1) {
       return data.split(/\n/g)
@@ -49,9 +82,13 @@ function split (data, options) {
 
   if (typeof data === 'object') {
     for (var k in data) {
-      var nextOpt = options
+      var nextOpt = JSON.parse(JSON.stringify(options))
 
-      data[k] = split(data[k], options)
+      if (options.excluded) {
+        nextOpt.excluded = reducePath(options.excluded, k)
+      }
+
+      data[k] = split(data[k], nextOpt)
     }
   }
 
