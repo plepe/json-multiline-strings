@@ -1,1 +1,1 @@
-module.exports = require('src/json-multline-strings')
+module.exports = require('./src/json-multiline-strings')

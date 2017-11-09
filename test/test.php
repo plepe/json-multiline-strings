@@ -1,8 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-require("src/json-multiline-strings.php");
-
 class jsonMultilineStrings extends TestCase
 {
     public function testjsonMultilineStringsSplit()
