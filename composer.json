@@ -1,4 +1,15 @@
 {
+    "name": "plepe/json-multiline-strings",
+    "description": "One shortcoming of JSON is the lack of multiline support. This module will split/join multiline strings to string arrays which is more readable.",
+    "homepage": "https://github.com/plepe/json-multiline-strings",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Stephan Bösch-Plepelits",
+            "email": "skunk@xover.mud.at",
+            "homepage": "https://github.com/plepe"
+        }
+    ],
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.8",
         "phpunit/phpunit": "^6.4"
