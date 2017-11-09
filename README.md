@@ -41,13 +41,13 @@ console.log(JSON.stringify(jsonMultilineStrings.join(input), null, '    '))
 Processes input data recursively and convert all multiline strings to string arrays.
 
 Options:
-- currently none
+- exclude: Exclude the following paths from modifications. Give an array of string arrays, e.g. [ [ 'foo', 'bar' ], [ 'test' ] ]. This would not modify the paths 'foo/bar' and 'test'.
 
 ## jsonMultilineStrings.join(data, options) resp. jsonMultilineStringsJoin(data, options)
 Processes input data recursively and convert all string arrays to multiline strings.
 
 Options:
-- currently none
+- exclude: Exclude the following paths from modifications. Give an array of string arrays, e.g. [ [ 'foo', 'bar' ], [ 'test' ] ]. This would not modify the paths 'foo/bar' and 'test'.
 
 # INSTALL
 ## JS usage via npm

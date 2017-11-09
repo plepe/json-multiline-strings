@@ -10,12 +10,12 @@ describe('jsonMultilineStrings.split', function () {
     assert.deepEqual(expected, jsonMultilineStrings.split(input))
   })
 
-  it('excluded', function () {
+  it('exclude', function () {
     var input = { foo: 'bar', long: 'text with\nseveral\nline breaks', excluded: 'text with\nseveral\nline breaks', number: 5 }
     var expected = { foo: 'bar', long: [ 'text with', 'several', 'line breaks' ], excluded: 'text with\nseveral\nline breaks', number: 5 }
 
     assert.deepEqual(expected, jsonMultilineStrings.split(input, {
-      excluded: [ [ 'excluded' ] ]
+      exclude: [ [ 'excluded' ] ]
     }))
   })
 
@@ -42,12 +42,12 @@ describe('jsonMultilineStrings.join', function () {
     assert.deepEqual(expected, jsonMultilineStrings.join(input))
   })
 
-  it('excluded', function () {
+  it('exclude', function () {
     var input = { foo: 'bar', long: [ 'text with', 'several', 'line breaks' ], excluded: [ 'text with', 'several', 'line breaks' ], nojoin: [ 'this no join', 1 ] }
     var expected = { foo: 'bar', long: 'text with\nseveral\nline breaks', excluded: [ 'text with', 'several', 'line breaks' ], nojoin: [ 'this no join', 1 ] }
 
     assert.deepEqual(expected, jsonMultilineStrings.join(input, {
-      excluded: [ [ 'excluded' ] ]
+      exclude: [ [ 'excluded' ] ]
     }))
   })
 
